@@ -27,7 +27,7 @@ def create_news(request):
     return render(request, "create_news.html", context)
 
 def show_news(request, id):
-    news = get_object_or_404
+    news = get_object_or_404(News, pk=id)
     news.increment_views()
 
     context = {
