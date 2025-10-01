@@ -165,8 +165,8 @@ def delete_news(request, id):
 @csrf_exempt
 @require_POST
 def add_news_entry_ajax(request):
-    title = request.POST.get("title")
-    content = request.POST.get("content")
+    title = strip_tags(request.POST.get("title")) # strip HTML tags!
+    content = strip_tags(request.POST.get("content")) # strip HTML tags!
     category = request.POST.get("category")
     thumbnail = request.POST.get("thumbnail")
     is_featured = request.POST.get("is_featured") == 'on'  # checkbox handling
@@ -185,8 +185,3 @@ def add_news_entry_ajax(request):
     return HttpResponse(b"CREATED", status=201)
 
 
-@csrf_exempt
-@require_POST
-def add_news_entry_ajax(request):
-    title = strip_tags(request.POST.get("title")) # strip HTML tags!
-    content = strip_tags(request.POST.get("content")) # strip HTML tags!
